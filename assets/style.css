@@ -1,0 +1,106 @@
+/* ==========================================================================
+   Visa & Work Permit — FDI Accounting & Advisory
+   Loaded before Tailwind (Play CDN), so Tailwind utilities override these
+   component classes when both are used on the same element.
+   ========================================================================== */
+
+/* ---------- Design tokens (keep in sync with tailwind.config in index.html) ---------- */
+:root {
+  --brand: #18A84C;
+  --brand-dark: #12903F;
+  --ink: #163A75;
+  --off: #1546A0;
+  --muted: #5E6878;
+  --sky: #E7F8EC;
+  --shadow-btn: rgba(0,0,0,.03) 0 4px 6.4px, rgba(0,0,0,.05) 0 3px 9.6px, rgba(0,0,0,.07) 0 8px 32px, rgba(0,0,0,.1) 0 32px 96px;
+  --ease-out: cubic-bezier(.2,.8,.2,1);
+  --ease-ui: cubic-bezier(.4,0,.2,1);
+}
+
+/* ---------- Fonts & preloader ---------- */
+/* LINE Seed Sans — EN */
+@font-face { font-family:'LINE Seed Sans'; src:url('fonts/LINESeedSans_W_Th.woff2') format('woff2'); font-weight:100 300; font-style:normal; font-display:swap; }
+@font-face { font-family:'LINE Seed Sans'; src:url('fonts/LINESeedSans_W_Rg.woff2') format('woff2'); font-weight:400 500; font-style:normal; font-display:swap; }
+@font-face { font-family:'LINE Seed Sans'; src:url('fonts/LINESeedSans_W_Bd.woff2') format('woff2'); font-weight:600 700; font-style:normal; font-display:swap; }
+@font-face { font-family:'LINE Seed Sans'; src:url('fonts/LINESeedSans_W_XBd.woff2') format('woff2'); font-weight:800; font-style:normal; font-display:swap; }
+@font-face { font-family:'LINE Seed Sans'; src:url('fonts/LINESeedSans_W_He.woff2') format('woff2'); font-weight:900; font-style:normal; font-display:swap; }
+/* LINE Seed Sans TH — TH */
+@font-face { font-family:'LINE Seed Sans TH'; src:url('fonts/LINESeedSansTH_W_Th.woff2') format('woff2'); font-weight:100 300; font-style:normal; font-display:swap; }
+@font-face { font-family:'LINE Seed Sans TH'; src:url('fonts/LINESeedSansTH_W_Rg.woff2') format('woff2'); font-weight:400 500; font-style:normal; font-display:swap; }
+@font-face { font-family:'LINE Seed Sans TH'; src:url('fonts/LINESeedSansTH_W_Bd.woff2') format('woff2'); font-weight:600 700; font-style:normal; font-display:swap; }
+@font-face { font-family:'LINE Seed Sans TH'; src:url('fonts/LINESeedSansTH_W_XBd.woff2') format('woff2'); font-weight:800; font-style:normal; font-display:swap; }
+@font-face { font-family:'LINE Seed Sans TH'; src:url('fonts/LINESeedSansTH_W_He.woff2') format('woff2'); font-weight:900; font-style:normal; font-display:swap; }
+/* Preloader — plain CSS so it renders before Tailwind is ready */
+#preloader { position:fixed; inset:0; z-index:200; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; background:#fff; transition:opacity .5s ease, visibility .5s ease; }
+#preloader.done { opacity:0; visibility:hidden; }
+#preloader img { width:150px; height:auto; animation:plPulse 1.6s ease-in-out infinite; }
+#preloader .pl-bar { position:relative; width:150px; height:4px; border-radius:4px; background:var(--sky); overflow:hidden; }
+#preloader .pl-bar::after { content:""; position:absolute; inset:0; width:40%; border-radius:4px; background:linear-gradient(90deg,var(--brand),var(--off)); animation:plSlide 1.1s cubic-bezier(.6,0,.4,1) infinite; }
+@keyframes plPulse { 0%,100% { transform:scale(1); opacity:1; } 50% { transform:scale(.96); opacity:.85; } }
+@keyframes plSlide { 0% { transform:translateX(-100%); } 100% { transform:translateX(250%); } }
+@media (prefers-reduced-motion: reduce) { #preloader img, #preloader .pl-bar::after { animation:none; } }
+
+/* ---------- Layout & typography ---------- */
+.container-x { max-width:1240px; margin-inline:auto; padding-inline:1.25rem; }
+.eyebrow { font-size:.75rem; line-height:1rem; font-weight:700; letter-spacing:.14em; color:var(--brand); }
+.section-title { font-size:28px; line-height:1.3; font-weight:800; text-wrap:balance; }
+.section-lead { font-size:17px; line-height:1.75; color:var(--muted); }
+@media (min-width: 768px) {
+  .container-x { padding-inline:2.5rem; }
+  .section-title { font-size:42px; }
+}
+
+/* ---------- Navigation ---------- */
+.nav-link { padding:.5rem 1rem; border-radius:9999px; font-size:15px; font-weight:500; color:var(--ink); transition:color .15s var(--ease-ui), background-color .15s var(--ease-ui); }
+.nav-link:hover { color:var(--brand); background:var(--sky); }
+.m-link { display:flex; align-items:center; justify-content:space-between; padding-block:.875rem; border-bottom:1px solid var(--sky); font-size:1rem; line-height:1.5rem; font-weight:600; }
+.m-link:hover { color:var(--brand); }
+
+/* Mobile menu: smooth height + staggered items */
+.mmenu { display:grid; grid-template-rows:0fr; transition:grid-template-rows .42s var(--ease-out); }
+.mmenu > div { min-height:0; overflow:hidden; }
+.mmenu.open { grid-template-rows:1fr; }
+.mmenu .m-item { opacity:0; transform:translateY(-10px); transition:opacity .25s ease, transform .3s ease; }
+.mmenu.open .m-item { opacity:1; transform:none; transition:opacity .35s ease calc(var(--i) * 45ms + 100ms), transform .45s var(--ease-out) calc(var(--i) * 45ms + 100ms); }
+
+/* Burger → X */
+.burger span { display:block; width:18px; height:2px; border-radius:2px; background:var(--ink); transition:transform .35s var(--ease-out), opacity .2s ease; }
+.burger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity:0; transform:scaleX(.3); }
+.burger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+/* ---------- Buttons ---------- */
+.btn { display:flex; align-items:center; justify-content:center; gap:.625rem; height:3rem; padding-inline:1.75rem; border-radius:9999px; font-weight:700; transition:background-color .15s var(--ease-ui), transform .15s var(--ease-ui); }
+.btn:hover { transform:translateY(-2px); }
+.btn-line { background:var(--brand); color:#fff; box-shadow:var(--shadow-btn); }
+.btn-line:hover { background:var(--brand-dark); }
+.btn-call { background:#fff; color:var(--ink); }
+.btn-call:hover { background:var(--sky); }
+
+/* ---------- Hero trust bar ---------- */
+.trust-item { display:flex; align-items:center; gap:.625rem; font-size:.875rem; line-height:1.25rem; font-weight:600; color:#fff; }
+.trust-ic { flex:none; display:flex; align-items:center; justify-content:center; width:1.75rem; height:1.75rem; border-radius:9999px; background:rgb(255 255 255 / .15); font-size:15px; }
+
+/* ---------- Footer ---------- */
+.footer-col { display:flex; flex-direction:column; gap:.875rem; font-size:14.5px; }
+.footer-title { font-size:13px; font-weight:700; letter-spacing:.1em; color:#fff; }
+
+/* ---------- Effects ---------- */
+[data-lucide] { width:1em; height:1em; }
+
+/* Reveal on scroll */
+.reveal { opacity:0; transform:translateY(18px); transition:opacity .5s ease, transform .5s var(--ease-out); }
+.reveal.in { opacity:1; transform:none; }
+
+/* Floating CTA: hidden until scrolled, items slide in top → bottom */
+#floatCta .fc-item { opacity:0; transform:translateY(-12px) scale(.96); pointer-events:none; transition:opacity .25s ease, transform .3s ease, background-color .2s; }
+#floatCta.show .fc-item { opacity:1; transform:none; pointer-events:auto; transition:opacity .35s ease calc(var(--i) * 70ms), transform .45s var(--ease-out) calc(var(--i) * 70ms), background-color .2s; }
+
+/* FAQ accordion */
+.faq summary::-webkit-details-marker { display:none; }
+.faq[open] .faq-ic { transform:rotate(45deg); background:var(--brand); color:#fff; }
+
+/* Lightbox + Swiper */
+.modal-bg { transition:opacity .28s ease; }
+body { --swiper-pagination-color:var(--brand); --swiper-pagination-bullet-inactive-color:var(--ink); --swiper-pagination-bullet-inactive-opacity:.18; }
+.swiper-pagination { position:static !important; margin-top:16px; }
