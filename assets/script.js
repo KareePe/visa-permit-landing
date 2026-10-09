@@ -1,7 +1,7 @@
 /* ==========================================================================
    Visa & Work Permit — FDI Accounting & Advisory
-   Page behaviour: i18n, section rendering, nav, AOS, Swiper, lightbox.
-   Loaded at the end of <body> after Swiper, Lucide, AOS and assets/i18n.js.
+   Page behaviour: i18n, section rendering, nav, reveal on scroll, Swiper, lightbox.
+   Loaded with `defer` after assets/icons.js and assets/i18n.js.
    ========================================================================== */
 /* ============ Helpers ============ */
 const $ = sel => document.querySelector(sel);
@@ -97,8 +97,10 @@ function renderContent() {
     </details>`);
 }
 
-// Our work (slides duplicated so Swiper's loop has enough slides)
-render('#workSlides', [...CONTENT.th.WORKS, ...CONTENT.th.WORKS], ([id, tag], j) => `
+// Our work (slides duplicated so Swiper's loop has enough slides).
+// The section is hidden for now — skip it (and Swiper) entirely while it is.
+const worksOn = !$('#our-work').classList.contains('hidden');
+if (worksOn) render('#workSlides', [...CONTENT.th.WORKS, ...CONTENT.th.WORKS], ([id, tag], j) => `
   <div class="swiper-slide !h-auto">
     <button data-lb="${j % WORKS_COUNT}" class="group block w-full text-left cursor-zoom-in">
       <div class="relative aspect-[4/5] rounded-[36px] overflow-hidden shadow-card bg-sky">
@@ -139,8 +141,8 @@ function applyLang() {
   lucide.createIcons();
   $('#langCur').textContent = lang.toUpperCase();
   $$('[data-lang]').forEach(b => b.setAttribute('aria-checked', b.dataset.lang === lang));
-  // Re-rendered cards are already on screen — show them without replaying AOS
-  if (aosReady) { $$('[data-aos]:not(.aos-animate)').forEach(el => el.classList.add('aos-animate')); AOS.refresh(); }
+  // Re-rendered cards are already on screen — show them without replaying the reveal
+  if (aosReady) $$('[data-aos]:not(.aos-animate)').forEach(el => el.classList.add('aos-animate'));
 }
 function setLang(next) {
   if (!LANGS.includes(next) || next === lang) return;
@@ -153,15 +155,16 @@ applyLang();
 /* ============ Interactions ============ */
 // Navbar shrink + floating CTA visibility
 const nav = $('#nav'), navInner = $('#navInner'), floatCta = $('#floatCta');
+// Read scrollY once, before any class change, so it never forces a layout
 const onScroll = () => {
-  const scrolled = scrollY > 8;
+  const y = scrollY, scrolled = y > 8;
   nav.classList.toggle('shadow-card', scrolled);
   navInner.classList.toggle('h-[66px]', scrolled);
   navInner.classList.toggle('h-[76px]', !scrolled);
-  floatCta.classList.toggle('show', scrollY > 100);
+  floatCta.classList.toggle('show', y > 100);
 };
 addEventListener('scroll', onScroll, { passive: true });
-onScroll();
+requestAnimationFrame(onScroll); // after the first layout, not forced inside this (already long) task
 
 // Mobile menu
 const menu = $('#mobileMenu'), menuBtn = $('#menuBtn');
@@ -190,11 +193,20 @@ $$('[data-lang]').forEach(b => b.addEventListener('click', () => {
 }));
 document.addEventListener('click', e => { if (!langSwitch.contains(e.target)) setLangMenu(false); });
 
-// Reveal on scroll (AOS) — start after the preloader so the hero animates in view
-const initAos = () => (aosReady = true, AOS.init({
-  once: true, duration: 600, easing: 'ease-out-cubic', offset: 60,
-  disable: () => matchMedia('(prefers-reduced-motion: reduce)').matches
-}));
+// Reveal on scroll — AOS's CSS driven by an IntersectionObserver instead of aos.js, which measured
+// every [data-aos] element on init (a long layout task). Starts after the preloader so the hero animates in view.
+function initAos() {
+  aosReady = true;
+  Object.assign(document.body.dataset, { aosEasing: 'ease-out-cubic', aosDuration: '600', aosDelay: '0' });
+  const els = $$('[data-aos]');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return els.forEach(el => el.classList.add('aos-animate'));
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('aos-animate');
+    io.unobserve(e.target);
+  }), { rootMargin: '0px 0px -60px 0px' });
+  els.forEach(el => io.observe(el));
+}
 if (window.preloaderDone) initAos();
 else addEventListener('preloader:done', initAos, { once: true });
 
@@ -212,15 +224,21 @@ function closeLayer(el) {
   }, 300);
 }
 
-// Swiper
-const swiper = new Swiper('#workSwiper', {
+// Swiper — loaded on demand, only when the Our Work section is shown
+let swiper = null;
+const loadSwiper = () => new Promise((resolve, reject) => {
+  const base = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min';
+  document.head.append(Object.assign(document.createElement('link'), { rel: 'stylesheet', href: `${base}.css` }));
+  document.head.append(Object.assign(document.createElement('script'), { src: `${base}.js`, onload: resolve, onerror: reject }));
+});
+if (worksOn) loadSwiper().then(() => { swiper = new Swiper('#workSwiper', {
   loop: true, speed: 550, spaceBetween: 20, slidesPerView: 1, grabCursor: true,
   autoplay: { delay: 3200, disableOnInteraction: false, pauseOnMouseEnter: true },
   breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 }, 1280: { slidesPerView: 4 } },
   navigation: { prevEl: '#wPrev', nextEl: '#wNext' },
   pagination: { el: '#wPag', clickable: true, renderBullet: (i, cls) => i < WORKS_COUNT ? `<span class="${cls}"></span>` : '' },
   on: { slideChange(s) { s.pagination.bullets.forEach((b, k) => b.classList.toggle('swiper-pagination-bullet-active', k === s.realIndex % WORKS_COUNT)); } }
-});
+}); });
 
 // Lightbox
 const lb = $('#lightbox');
@@ -232,12 +250,12 @@ function fillLb(i) {
   $('#lbCap').textContent = cap;
   $('#lbCount').textContent = `${lbIndex + 1} / ${WORKS_COUNT}`;
 }
-function closeLb() { closeLayer(lb); swiper.autoplay.start(); }
+function closeLb() { closeLayer(lb); swiper?.autoplay.start(); }
 document.addEventListener('click', e => {
   const b = e.target.closest('[data-lb]');
   if (!b) return;
   fillLb(+b.dataset.lb);
-  swiper.autoplay.stop();
+  swiper?.autoplay.stop();
   openLayer(lb);
 });
 lb.addEventListener('click', e => { if (e.target === lb || e.target.closest('[data-lb-close]')) closeLb(); });

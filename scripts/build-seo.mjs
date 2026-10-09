@@ -6,8 +6,8 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import vm from 'node:vm';
 
-// ⚠️ Production URL with trailing slash — replace before deploying, then run `npm run build`
-const SITE_URL = 'https://example.com/';
+// Production URL with trailing slash — run `npm run build` after changing it
+const SITE_URL = 'https://visaworkpermits.com/';
 const EN_URL = `${SITE_URL}?lang=en`;
 const OG_IMAGE = `${SITE_URL}assets/img/og-image.jpg`;
 

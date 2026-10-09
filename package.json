@@ -2,13 +2,16 @@
   "name": "visa-permit-landing",
   "private": true,
   "scripts": {
-    "build": "npm run build:css && npm run build:seo",
+    "build": "npm run build:icons && npm run build:css && npm run build:seo",
+    "build:icons": "node scripts/build-icons.mjs",
     "build:css": "tailwindcss -i assets/src/app.css -o assets/app.css --minify",
     "build:seo": "node scripts/build-seo.mjs",
-    "dev": "tailwindcss -i assets/src/app.css -o assets/app.css --watch"
+    "dev": "tailwindcss -i assets/src/app.css -o assets/app.css --watch",
+    "build:og": "\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --disable-gpu --hide-scrollbars --allow-file-access-from-files --window-size=1200,630 --virtual-time-budget=8000 --screenshot=og.png \"file://$PWD/scripts/og-image.html\" && sips -s format jpeg -s formatOptions 85 og.png --out assets/img/og-image.jpg && rm og.png"
   },
   "devDependencies": {
     "aos": "2.3.4",
+    "lucide-static": "^0.460.0",
     "tailwindcss": "3.4.19"
   }
 }

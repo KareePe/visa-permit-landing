@@ -4,8 +4,8 @@
 
 FDI Accounting & Advisory Co., Ltd., part of FDI Group, has advised Thai and foreign businesses since 2003. We consult on and handle visas, work permits, renewals and documents for foreigners — and take care of your business end to end, from accounting and tax to payroll and HR.
 
-- Thai page: https://example.com/
-- English page: https://example.com/?lang=en
+- Thai page: https://visaworkpermits.com/
+- English page: https://visaworkpermits.com/?lang=en
 
 ## Contact
 - LINE: @fdigroup — https://line.me/R/ti/p/@fdigroup
