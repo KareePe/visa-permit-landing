@@ -4,15 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Visa &amp; Work Permit Services in Thailand</title>
-<meta name="description" content="ให้คำปรึกษาและดำเนินการด้านวีซ่า ใบอนุญาตทำงาน การต่ออายุ และเอกสารสำหรับชาวต่างชาติในประเทศไทย">
+<meta name="description" data-i18n-attr="content:meta.desc" content="ให้คำปรึกษาและดำเนินการด้านวีซ่า ใบอนุญาตทำงาน การต่ออายุ และเอกสารสำหรับชาวต่างชาติในประเทศไทย">
 <link rel="icon" href="favicon.ico" sizes="48x48">
 <link rel="icon" href="assets/img/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <meta name="theme-color" content="#18A84C">
-<link rel="preload" href="assets/fonts/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/LINESeedSansTH_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
 <link rel="stylesheet" href="assets/style.css">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -29,9 +31,9 @@ tailwind.config = {
         fog: { 100: '#E9EAED', 200: '#D4D6DB', 300: '#C4C6CC' } // light text on blue backgrounds
       },
       fontFamily: {
-        sans: ['LINE Seed Sans', 'LINE Seed Sans TH', 'system-ui', 'sans-serif'],
-        en: ['LINE Seed Sans', 'system-ui', 'sans-serif'],
-        th: ['LINE Seed Sans TH', 'system-ui', 'sans-serif']
+        sans: ['Noto Sans Thai', 'system-ui', 'sans-serif'],
+        en: ['Noto Sans Thai', 'system-ui', 'sans-serif'],
+        th: ['Noto Sans Thai', 'system-ui', 'sans-serif']
       },
       boxShadow: {
         card: 'rgba(0,0,0,.04) 0 2px 6px, rgba(0,0,0,.06) 0 5px 18px, rgba(0,0,0,.1) 0 24px 83px',
@@ -47,8 +49,15 @@ tailwind.config = {
 </head>
 <body class="font-sans text-ink bg-white antialiased overflow-x-hidden">
 
+<!-- SOCIAL ICONS (SVG sprite, used via <use href="#ic-…">) -->
+<svg width="0" height="0" class="absolute" aria-hidden="true">
+  <symbol id="ic-youtube" viewBox="0 0 24 24"><path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></symbol>
+  <symbol id="ic-facebook" viewBox="0 0 24 24"><path fill="currentColor" d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4z"/></symbol>
+  <symbol id="ic-tiktok" viewBox="0 0 24 24"><path fill="currentColor" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></symbol>
+</svg>
+
 <!-- PRELOADER (plain CSS so it shows before Tailwind loads) -->
-<div id="preloader" role="status" aria-label="กำลังโหลด">
+<div id="preloader" role="status" aria-label="กำลังโหลด" data-i18n-attr="aria-label:a11y.loading">
   <img src="assets/img/fdi-logo.webp" alt="FDI Accounting &amp; Advisory" width="439" height="204">
   <div class="pl-bar"></div>
 </div>
@@ -62,6 +71,8 @@ tailwind.config = {
     if (gone) return; gone = true;
     setTimeout(() => {
       el.classList.add('done');
+      window.preloaderDone = true;
+      dispatchEvent(new Event('preloader:done'));
       document.documentElement.style.overflow = '';
       setTimeout(() => el.remove(), 600);
     }, Math.max(0, 400 - (Date.now() - t0)));
@@ -88,23 +99,32 @@ tailwind.config = {
       <a href="#faq" class="nav-link">FAQ</a>
       <a href="#contact" class="nav-link">Contact</a>
     </nav>
-    <div class="hidden nav:flex items-center gap-2.5">
-      <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" class="flex items-center gap-2 h-10 px-5 rounded-full bg-brand text-white font-semibold text-sm shadow-btn hover:bg-brand-dark hover:-translate-y-px transition"><img src="assets/img/line-cta.webp" alt="" class="w-5 h-5 flex-none">LINE</a>
-      <a href="tel:+6626426866" class="flex items-center gap-2 h-10 px-5 rounded-full bg-white text-ink border border-sky font-semibold text-sm shadow-btn hover:bg-sky hover:border-line transition"><i data-lucide="phone"></i>Call Us</a>
+    <div class="flex items-center gap-2.5">
+      <div id="langSwitch" class="relative">
+        <button id="langBtn" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="langMenu" aria-label="เลือกภาษา" data-i18n-attr="aria-label:a11y.lang" class="flex items-center gap-1.5 h-10 pl-3 pr-2.5 rounded-full bg-white text-ink border border-sky font-semibold text-sm hover:bg-sky hover:border-line transition"><i data-lucide="globe" class="text-base text-brand"></i><span id="langCur">TH</span><i data-lucide="chevron-down" class="lang-chev text-muted"></i></button>
+        <div id="langMenu" role="menu" class="lang-menu">
+          <button type="button" role="menuitemradio" data-lang="th" class="lang-opt">ไทย<span>TH</span></button>
+          <button type="button" role="menuitemradio" data-lang="en" class="lang-opt">English<span>EN</span></button>
+        </div>
+      </div>
+      <div class="hidden nav:flex items-center gap-2.5">
+        <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" class="flex items-center gap-2 h-10 px-5 rounded-full bg-brand text-white font-semibold text-sm shadow-btn hover:bg-brand-dark hover:-translate-y-px transition"><img src="assets/img/line-cta.webp" alt="" class="w-5 h-5 flex-none">LINE</a>
+        <a href="tel:+6626426866" class="flex items-center gap-2 h-10 px-5 rounded-full bg-white text-ink border border-sky font-semibold text-sm shadow-btn hover:bg-sky hover:border-line transition"><i data-lucide="phone"></i>Call Us</a>
+      </div>
+      <button id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu" class="burger nav:hidden w-11 h-11 rounded-full bg-sky hover:bg-mint flex flex-col items-center justify-center gap-[5px] transition"><span></span><span></span><span></span></button>
     </div>
-    <button id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu" class="burger nav:hidden w-11 h-11 rounded-full bg-sky hover:bg-mint flex flex-col items-center justify-center gap-[5px] transition"><span></span><span></span><span></span></button>
   </div>
   <div id="mobileMenu" class="mmenu nav:hidden" inert>
     <div>
       <div class="border-t border-sky bg-white px-5 pt-2 pb-5 shadow-card">
-        <a href="#services" class="m-link m-item" style="--i:0">Services · บริการ<i data-lucide="chevron-right" class="text-muted"></i></a>
-        <a href="#why-us" class="m-link m-item" style="--i:1">Why Us · เหตุผลที่ควรใช้บริการ<i data-lucide="chevron-right" class="text-muted"></i></a>
-        <a href="#our-work" class="m-link m-item hidden" style="--i:2">Our Work · ผลงาน<i data-lucide="chevron-right" class="text-muted"></i></a>
-        <a href="#faq" class="m-link m-item" style="--i:2">FAQ · คำถามที่พบบ่อย<i data-lucide="chevron-right" class="text-muted"></i></a>
-        <a href="#contact" class="m-link m-item" style="--i:3">Contact · ติดต่อ<i data-lucide="chevron-right" class="text-muted"></i></a>
+        <a href="#services" class="m-link m-item" style="--i:0"><span data-i18n="nav.services">Services · บริการ</span><i data-lucide="chevron-right" class="text-muted"></i></a>
+        <a href="#why-us" class="m-link m-item" style="--i:1"><span data-i18n="nav.why">Why Us · เหตุผลที่ควรใช้บริการ</span><i data-lucide="chevron-right" class="text-muted"></i></a>
+        <a href="#our-work" class="m-link m-item hidden" style="--i:2"><span data-i18n="nav.work">Our Work · ผลงาน</span><i data-lucide="chevron-right" class="text-muted"></i></a>
+        <a href="#faq" class="m-link m-item" style="--i:2"><span data-i18n="nav.faq">FAQ · คำถามที่พบบ่อย</span><i data-lucide="chevron-right" class="text-muted"></i></a>
+        <a href="#contact" class="m-link m-item" style="--i:3"><span data-i18n="nav.contact">Contact · ติดต่อ</span><i data-lucide="chevron-right" class="text-muted"></i></a>
         <div class="m-item grid grid-cols-2 gap-2.5 mt-4" style="--i:4">
           <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" class="h-11 rounded-full bg-brand text-white font-semibold flex items-center justify-center gap-2"><img src="assets/img/line-cta.webp" alt="" class="w-5 h-5 flex-none">LINE</a>
-          <a href="tel:+6626426866" class="h-11 rounded-full bg-white text-ink border border-sky font-semibold flex items-center justify-center gap-2"><i data-lucide="phone"></i>โทรหาเรา</a>
+          <a href="tel:+6626426866" class="h-11 rounded-full bg-white text-ink border border-sky font-semibold flex items-center justify-center gap-2"><i data-lucide="phone"></i><span data-i18n="cta.call">โทรหาเรา</span></a>
         </div>
       </div>
     </div>
@@ -113,24 +133,30 @@ tailwind.config = {
 
 <!-- HERO -->
 <section id="top" class="relative min-h-[calc(100svh-66px)] flex items-center overflow-hidden bg-off">
-  <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=2400&q=80" alt="Consultant reviewing documents" class="absolute inset-0 w-full h-full object-cover">
+  <img src="assets/img/bg-banner.png" alt="Consultant reviewing documents" class="absolute inset-0 w-full h-full object-cover">
   <div class="absolute inset-0 bg-gradient-to-r from-[rgba(21,70,160,.92)] via-[rgba(21,70,160,.78)] to-[rgba(21,70,160,.35)]"></div>
   <div class="relative w-full container-x py-16 md:py-28">
     <div class="flex flex-col gap-6 max-w-[640px]">
-      <span class="self-start flex items-center gap-2 pl-2.5 pr-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-white font-bold text-xs tracking-[.1em]"><i data-lucide="shield-check" class="text-base text-accent"></i>FDI GROUP · SINCE 2003</span>
-      <div class="flex flex-col gap-3.5">
-        <h1 class="text-[34px] md:text-5xl lg:text-[60px] leading-[1.22] font-extrabold text-white text-balance">จัดการเรื่องวีซ่าและใบอนุญาตทำงานในไทย ให้เป็นเรื่องง่าย</h1>
+      <span data-aos="fade-up" class="self-start flex items-center gap-2 pl-2.5 pr-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-white font-bold text-xs tracking-[.1em]"><i data-lucide="shield-check" class="text-base text-accent"></i>FDI GROUP · SINCE 2003</span>
+      <div data-aos="fade-up" data-aos-delay="100" class="flex flex-col gap-3.5">
+        <h1 data-i18n="hero.title" class="text-[34px] md:text-5xl lg:text-[60px] leading-[1.22] font-extrabold text-white text-balance">จัดการเรื่องวีซ่าและใบอนุญาตทำงานในไทย ให้เป็นเรื่องง่าย</h1>
         <p class="font-semibold text-base md:text-lg text-line">Visa &amp; Work Permit Services by FDI Accounting &amp; Advisory</p>
       </div>
-      <p class="text-base md:text-lg leading-[1.75] text-fog-100 max-w-[560px]">บริษัท เอฟ ดี ไอ แอคเคาน์ติ้ง แอนด์ แอดไวซอรี่ จำกัด ในเครือ FDI Group ที่ปรึกษาธุรกิจสำหรับผู้ประกอบการไทยและต่างชาติตั้งแต่ปี 2546 ให้คำปรึกษาและดำเนินการด้านวีซ่า ใบอนุญาตทำงาน การต่ออายุ และเอกสารสำหรับชาวต่างชาติ พร้อมดูแลธุรกิจของคุณครบวงจร ทั้งบัญชี ภาษี เงินเดือน และทรัพยากรบุคคล</p>
-      <div class="flex flex-col gap-3.5">
+      <p data-i18n="hero.intro" data-aos="fade-up" data-aos-delay="200" class="text-base md:text-lg leading-[1.75] text-fog-100 max-w-[560px]">บริษัท เอฟ ดี ไอ แอคเคาน์ติ้ง แอนด์ แอดไวซอรี่ จำกัด ในเครือ FDI Group ที่ปรึกษาธุรกิจสำหรับผู้ประกอบการไทยและต่างชาติตั้งแต่ปี 2546 ให้คำปรึกษาและดำเนินการด้านวีซ่า ใบอนุญาตทำงาน การต่ออายุ และเอกสารสำหรับชาวต่างชาติ พร้อมดูแลธุรกิจของคุณครบวงจร ทั้งบัญชี ภาษี เงินเดือน และทรัพยากรบุคคล</p>
+      <div data-aos="fade-up" data-aos-delay="300" class="flex flex-col gap-3.5">
         <div class="flex flex-col sm:flex-row gap-3">
-          <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" class="btn btn-line"><img src="assets/img/line-cta.webp" alt="" class="w-6 h-6 flex-none">ปรึกษาผ่าน LINE</a>
-          <a href="tel:+6626426866" class="btn btn-call shadow-btn"><i data-lucide="phone" class="text-lg"></i>โทรหาเรา</a>
+          <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" class="btn btn-line cta-bounce"><img src="assets/img/line-cta.webp" alt="" class="w-6 h-6 flex-none"><span data-i18n="cta.line">ปรึกษาผ่าน LINE</span></a>
+          <a href="tel:+6626426866" class="btn btn-call shadow-btn cta-ring"><i data-lucide="phone" class="text-lg"></i><span data-i18n="cta.call">โทรหาเรา</span></a>
         </div>
-        <p class="text-sm text-fog-200">ปรึกษาเบื้องต้น • ประเมินเอกสาร • แจ้งขั้นตอนการดำเนินการ</p>
+        <p data-i18n="hero.tagline" class="text-sm text-fog-200">ปรึกษาเบื้องต้น • ประเมินเอกสาร • แจ้งขั้นตอนการดำเนินการ</p>
+        <div class="flex items-center gap-3">
+          <span data-i18n="hero.follow" class="text-sm text-fog-200">ติดตามเรา</span>
+          <a href="https://www.youtube.com/@fdigroup_Official" target="_blank" rel="noopener" aria-label="YouTube" class="social-btn" style="--c:#FF0000"><svg><use href="#ic-youtube"/></svg></a>
+          <a href="https://www.facebook.com/fdiaccounting" target="_blank" rel="noopener" aria-label="Facebook" class="social-btn" style="--c:#1877F2"><svg><use href="#ic-facebook"/></svg></a>
+          <a href="https://www.tiktok.com/@fdigroup_official" target="_blank" rel="noopener" aria-label="TikTok" class="social-btn" style="--c:#000"><svg><use href="#ic-tiktok"/></svg></a>
+        </div>
       </div>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-x-5 gap-y-3 pt-6 border-t border-white/20 max-w-[620px]">
+      <div data-aos="fade-up" data-aos-delay="400" class="grid grid-cols-2 md:grid-cols-4 gap-x-5 gap-y-3 pt-6 border-t border-white/20 max-w-[620px]">
         <div class="trust-item"><span class="trust-ic"><i data-lucide="award"></i></span>20+ Years Experience</div>
         <div class="trust-item"><span class="trust-ic"><i data-lucide="file-check"></i></span>Document Assistance</div>
         <div class="trust-item"><span class="trust-ic"><i data-lucide="zap"></i></span>Fast Response</div>
@@ -144,59 +170,59 @@ tailwind.config = {
 <!-- SERVICES -->
 <section id="services" class="bg-sky scroll-mt-16">
   <div class="container-x py-16 md:py-28">
-    <div class="reveal flex flex-wrap justify-between items-end gap-6 mb-9 md:mb-13">
+    <div data-aos="fade-up" class="flex flex-wrap justify-between items-end gap-6 mb-9 md:mb-13">
       <div class="flex flex-col gap-3.5 max-w-[720px]">
         <span class="eyebrow">OUR SERVICES</span>
-        <h2 class="section-title">บริการที่ปรึกษาด้านวีซ่าและใบอนุญาตทำงาน</h2>
-        <p class="section-lead">บริการให้คำปรึกษาแบบครบวงจรโดยผู้เชี่ยวชาญโดยตรง ทั้งสำหรับชาวต่างชาติที่ทำงานในประเทศไทย และคนไทยที่ต้องการไปทำงานต่างประเทศ</p>
+        <h2 data-i18n="svc.title" class="section-title">บริการที่ปรึกษาด้านวีซ่าและใบอนุญาตทำงาน</h2>
+        <p data-i18n="svc.lead" class="section-lead">บริการให้คำปรึกษาแบบครบวงจรโดยผู้เชี่ยวชาญโดยตรง ทั้งสำหรับชาวต่างชาติที่ทำงานในประเทศไทย และคนไทยที่ต้องการไปทำงานต่างประเทศ</p>
       </div>
     </div>
 
     <!-- Bento: image + core services -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
-      <figure class="reveal sm:col-span-2 lg:row-span-2 rounded-[28px] md:rounded-[32px] overflow-hidden bg-white shadow-card">
-        <img src="assets/img/services-visa-work-permit.webp" alt="FDI ให้บริการด้าน Visa &amp; Work Permit ครบจบในที่เดียว: ยื่นขอ Visa ทุกประเภท, ยื่นขอ Work Permit และให้คำปรึกษา" width="1200" height="1200" loading="lazy" class="block w-full h-auto">
+      <figure data-aos="fade-up" class="sm:col-span-2 lg:row-span-2 rounded-[28px] md:rounded-[32px] overflow-hidden bg-white shadow-card">
+        <img src="assets/img/services-visa-work-permit.webp" data-i18n-attr="alt:svc.imgAlt" alt="FDI ให้บริการด้าน Visa &amp; Work Permit ครบจบในที่เดียว: ยื่นขอ Visa ทุกประเภท, ยื่นขอ Work Permit และให้คำปรึกษา" width="1200" height="1200" loading="lazy" class="block w-full h-auto">
       </figure>
       <div id="svcMain" class="contents"></div>
-      <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" class="reveal group sm:col-span-2 relative overflow-hidden rounded-[28px] md:rounded-[32px] bg-off text-white p-6 md:p-7 flex items-center justify-between gap-5 hover:-translate-y-1 transition duration-300">
+      <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" data-aos="fade-up" class="group sm:col-span-2 relative overflow-hidden rounded-[28px] md:rounded-[32px] bg-off text-white p-6 md:p-7 flex items-center justify-between gap-5 hover:-translate-y-1 transition duration-300">
         <div class="absolute -right-16 -top-16 w-48 h-48 rounded-full border border-white/10"></div>
         <div class="relative flex flex-col gap-1">
-          <span class="text-sm text-line">ไม่แน่ใจว่าต้องใช้บริการไหน?</span>
-          <span class="text-lg md:text-xl font-extrabold leading-snug">ปรึกษาผู้เชี่ยวชาญของเราผ่าน LINE</span>
+          <span data-i18n="svc.unsure" class="text-sm text-line">ไม่แน่ใจว่าต้องใช้บริการไหน?</span>
+          <span data-i18n="svc.talk" class="text-lg md:text-xl font-extrabold leading-snug">ปรึกษาผู้เชี่ยวชาญของเราผ่าน LINE</span>
         </div>
         <span class="relative flex-none w-12 h-12 rounded-full bg-brand flex items-center justify-center group-hover:bg-brand-dark transition"><img src="assets/img/line-cta.webp" alt="" class="w-6 h-6"></span>
       </a>
     </div>
 
     <!-- By customer type -->
-    <div class="reveal flex flex-col gap-2 mt-14 md:mt-18 mb-6">
+    <div data-aos="fade-up" class="flex flex-col gap-2 mt-14 md:mt-18 mb-6">
       <span class="eyebrow">CHOOSE YOUR SERVICE</span>
-      <h3 class="text-2xl md:text-[30px] leading-[1.35] font-extrabold">เลือกบริการที่ตรงกับคุณ</h3>
+      <h3 data-i18n="svc.choose" class="text-2xl md:text-[30px] leading-[1.35] font-extrabold">เลือกบริการที่ตรงกับคุณ</h3>
     </div>
     <div class="grid md:grid-cols-2 gap-5 lg:gap-6">
-      <article class="reveal relative overflow-hidden rounded-[28px] md:rounded-[36px] bg-gradient-to-br from-brand to-brand-dark text-white p-7 md:p-10 flex flex-col gap-6">
+      <article data-aos="fade-up" class="relative overflow-hidden rounded-[28px] md:rounded-[36px] bg-gradient-to-br from-brand to-brand-dark text-white p-7 md:p-10 flex flex-col gap-6">
         <div class="absolute -right-20 -top-20 w-72 h-72 rounded-full bg-white/10"></div>
         <div class="relative flex items-center gap-4">
           <span class="flex-none w-13 h-13 rounded-2xl bg-white text-brand text-2xl flex items-center justify-center"><i data-lucide="briefcase"></i></span>
           <span class="rounded-full bg-white/20 px-3 py-1 text-xs font-bold tracking-[.1em]">FOR FOREIGNERS</span>
         </div>
-        <h3 class="relative text-[24px] md:text-[28px] leading-[1.35] font-extrabold">การให้บริการต่างชาติ<br>ทำงานในไทย</h3>
+        <h3 data-i18n="svc.inTitle" class="relative text-[24px] md:text-[28px] leading-[1.35] font-extrabold">การให้บริการต่างชาติ<br>ทำงานในไทย</h3>
         <ul class="relative grid gap-2.5" id="svcInbound"></ul>
-        <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" class="relative mt-auto self-start flex items-center gap-2 h-12 px-6 rounded-full bg-white text-brand font-bold hover:-translate-y-0.5 transition">ปรึกษาเรื่องนี้ <i data-lucide="arrow-right"></i></a>
+        <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" class="relative mt-auto self-start flex items-center gap-2 h-12 px-6 rounded-full bg-white text-brand font-bold hover:-translate-y-0.5 transition"><span data-i18n="svc.consult">ปรึกษาเรื่องนี้</span> <i data-lucide="arrow-right"></i></a>
       </article>
-      <article class="reveal relative overflow-hidden rounded-[28px] md:rounded-[36px] bg-off text-white p-7 md:p-10 flex flex-col gap-6">
+      <article data-aos="fade-up" class="relative overflow-hidden rounded-[28px] md:rounded-[36px] bg-off text-white p-7 md:p-10 flex flex-col gap-6">
         <div class="absolute -right-20 -top-20 w-72 h-72 rounded-full bg-white/10"></div>
         <div class="relative flex items-center gap-4">
           <span class="flex-none w-13 h-13 rounded-2xl bg-white text-ink text-2xl flex items-center justify-center"><i data-lucide="plane"></i></span>
           <span class="rounded-full bg-white/20 px-3 py-1 text-xs font-bold tracking-[.1em]">FOR THAIS</span>
         </div>
-        <h3 class="relative text-[24px] md:text-[28px] leading-[1.35] font-extrabold">การให้บริการสำหรับ<br>การไปทำงานต่างประเทศ</h3>
+        <h3 data-i18n="svc.outTitle" class="relative text-[24px] md:text-[28px] leading-[1.35] font-extrabold">การให้บริการสำหรับ<br>การไปทำงานต่างประเทศ</h3>
         <ul class="relative grid gap-2.5" id="svcOutbound"></ul>
         <div class="relative flex flex-col gap-3 pt-5 border-t border-white/15">
-          <span class="font-bold text-sm">เอกสารที่รับดำเนินการ</span>
+          <span data-i18n="svc.docs" class="font-bold text-sm">เอกสารที่รับดำเนินการ</span>
           <div class="flex flex-wrap gap-2" id="svcDocs"></div>
         </div>
-        <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" class="relative mt-auto self-start flex items-center gap-2 h-12 px-6 rounded-full bg-white text-ink font-bold hover:-translate-y-0.5 transition">ปรึกษาเรื่องนี้ <i data-lucide="arrow-right"></i></a>
+        <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" class="relative mt-auto self-start flex items-center gap-2 h-12 px-6 rounded-full bg-white text-ink font-bold hover:-translate-y-0.5 transition"><span data-i18n="svc.consult">ปรึกษาเรื่องนี้</span> <i data-lucide="arrow-right"></i></a>
       </article>
     </div>
   </div>
@@ -205,20 +231,20 @@ tailwind.config = {
 <!-- WHY US -->
 <section id="why-us" class="bg-white scroll-mt-16">
   <div class="container-x py-16 md:py-28 grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 lg:gap-18">
-    <div class="reveal flex flex-col gap-4 self-start lg:sticky lg:top-28">
+    <div data-aos="fade-up" class="flex flex-col gap-4 self-start lg:sticky lg:top-28">
       <span class="eyebrow">WHY FDI A&amp;A</span>
-      <h2 class="section-title">เหตุผลที่ควรใช้บริการกับเรา</h2>
-      <p class="section-lead">เราแจ้งราคาและขั้นตอนการดำเนินงานอย่างชัดเจนก่อนเริ่มใช้บริการ และดูแลต่อเนื่องจนถึงการส่งมอบงานให้กับลูกค้า</p>
+      <h2 data-i18n="why.title" class="section-title">เหตุผลที่ควรใช้บริการกับเรา</h2>
+      <p data-i18n="why.lead" class="section-lead">เราแจ้งราคาและขั้นตอนการดำเนินงานอย่างชัดเจนก่อนเริ่มใช้บริการ และดูแลต่อเนื่องจนถึงการส่งมอบงานให้กับลูกค้า</p>
       <div class="relative overflow-hidden mt-2 rounded-3xl bg-off text-white p-6 flex items-center gap-4">
         <div class="absolute -right-10 -top-10 w-36 h-36 rounded-full border border-white/10"></div>
         <span class="relative flex-none w-12 h-12 rounded-full bg-white/15 text-accent text-2xl flex items-center justify-center"><i data-lucide="award"></i></span>
         <div class="relative flex flex-col gap-0.5">
-          <span class="text-sm text-line">บริการประทับใจ</span>
-          <span class="text-lg md:text-xl font-extrabold leading-snug">ด้วยทีมงานมืออาชีพ</span>
-          <span class="text-sm font-semibold text-fog-100">“ยินดีให้คำปรึกษา”</span>
+          <span data-i18n="why.k1" class="text-sm text-line">บริการประทับใจ</span>
+          <span data-i18n="why.k2" class="text-lg md:text-xl font-extrabold leading-snug">ด้วยทีมงานมืออาชีพ</span>
+          <span data-i18n="why.k3" class="text-sm font-semibold text-fog-100">“ยินดีให้คำปรึกษา”</span>
         </div>
       </div>
-      <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" class="btn btn-line self-start mt-2 px-6"><img src="assets/img/line-cta.webp" alt="" class="w-5 h-5 flex-none">ปรึกษาผ่าน LINE</a>
+      <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" class="btn btn-line self-start mt-2 px-6"><img src="assets/img/line-cta.webp" alt="" class="w-5 h-5 flex-none"><span data-i18n="cta.line">ปรึกษาผ่าน LINE</span></a>
     </div>
     <div class="flex flex-col gap-4 md:gap-5" id="whyGrid"></div>
   </div>
@@ -227,26 +253,26 @@ tailwind.config = {
 <!-- PROCESS -->
 <section id="process" class="bg-white scroll-mt-16">
   <div class="container-x pb-16 md:pb-28">
-    <div class="reveal flex flex-col gap-3.5 mb-10 md:mb-14 max-w-[720px]">
+    <div data-aos="fade-up" class="flex flex-col gap-3.5 mb-10 md:mb-14 max-w-[720px]">
       <span class="eyebrow">HOW IT WORKS</span>
-      <h2 class="section-title">ขั้นตอนการดำเนินงาน Visa &amp; Work Permit</h2>
-      <p class="section-lead">8 ขั้นตอนตั้งแต่พูดคุยปรึกษา แจ้งราคา เตรียมและยื่นเอกสาร จนถึงส่งมอบงานให้กับลูกค้า</p>
+      <h2 data-i18n="proc.title" class="section-title">ขั้นตอนการดำเนินงาน Visa &amp; Work Permit</h2>
+      <p data-i18n="proc.lead" class="section-lead">8 ขั้นตอนตั้งแต่พูดคุยปรึกษา แจ้งราคา เตรียมและยื่นเอกสาร จนถึงส่งมอบงานให้กับลูกค้า</p>
     </div>
     <div class="grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-6 lg:gap-10 items-start">
-      <figure class="reveal lg:sticky lg:top-28 rounded-[28px] md:rounded-[36px] overflow-hidden bg-white shadow-card">
-        <img src="assets/img/process-visa-work-permit.webp" alt="ขั้นตอนการดำเนินงาน Visa &amp; Work Permit 8 ขั้นตอน" width="1200" height="1200" loading="lazy" class="block w-full h-auto">
+      <figure data-aos="fade-up" class="lg:sticky lg:top-28 rounded-[28px] md:rounded-[36px] overflow-hidden bg-white shadow-card">
+        <img src="assets/img/process-visa-work-permit.webp" data-i18n-attr="alt:proc.imgAlt" alt="ขั้นตอนการดำเนินงาน Visa &amp; Work Permit 8 ขั้นตอน" width="1200" height="1200" loading="lazy" class="block w-full h-auto">
       </figure>
       <div class="flex flex-col gap-5">
         <ol class="grid sm:grid-cols-2 gap-4" id="steps"></ol>
-        <div class="reveal relative overflow-hidden rounded-[28px] bg-off text-white p-6 md:p-8 flex flex-col sm:flex-row gap-4 sm:gap-5">
+        <div data-aos="fade-up" class="relative overflow-hidden rounded-[28px] bg-off text-white p-6 md:p-8 flex flex-col sm:flex-row gap-4 sm:gap-5">
           <div class="absolute -right-16 -bottom-20 w-56 h-56 rounded-full border border-white/10"></div>
           <span class="relative flex-none w-12 h-12 rounded-full bg-white/15 text-accent text-2xl flex items-center justify-center"><i data-lucide="info"></i></span>
           <div class="relative flex flex-col gap-1.5">
-            <p class="text-[15px] leading-[1.7] text-fog-100">การดำเนินงานและระยะเวลา ขึ้นอยู่กับความพร้อมของเอกสาร</p>
-            <p class="text-lg md:text-xl font-extrabold leading-snug">โดยทาง FDI จะแนะนำและตรวจสอบเอกสารในเบื้องต้น เพื่อให้การดำเนินงานเป็นไปอย่างราบรื่น</p>
+            <p data-i18n="proc.note1" class="text-[15px] leading-[1.7] text-fog-100">การดำเนินงานและระยะเวลา ขึ้นอยู่กับความพร้อมของเอกสาร</p>
+            <p data-i18n="proc.note2" class="text-lg md:text-xl font-extrabold leading-snug">โดยทาง FDI จะแนะนำและตรวจสอบเอกสารในเบื้องต้น เพื่อให้การดำเนินงานเป็นไปอย่างราบรื่น</p>
             <div class="mt-2 pt-3 border-t border-white/15 flex flex-col gap-0.5 text-[13px] text-line">
-              <span>* Visa ระยะเวลาพิจารณาขึ้นอยู่กับประเภทของวีซ่า</span>
-              <span>** Work Permit ระยะเวลาพิจารณาขึ้นอยู่กับสัญชาติของคนต่างด้าว</span>
+              <span data-i18n="proc.fn1">* Visa ระยะเวลาพิจารณาขึ้นอยู่กับประเภทของวีซ่า</span>
+              <span data-i18n="proc.fn2">** Work Permit ระยะเวลาพิจารณาขึ้นอยู่กับสัญชาติของคนต่างด้าว</span>
             </div>
           </div>
         </div>
@@ -258,11 +284,11 @@ tailwind.config = {
 <!-- OUR WORK (hidden for now — remove "hidden" to show) -->
 <section id="our-work" class="hidden bg-sky scroll-mt-16">
   <div class="container-x py-16 md:py-28">
-    <div class="reveal flex flex-wrap justify-between items-end gap-6 mb-8 md:mb-11">
+    <div data-aos="fade-up" class="flex flex-wrap justify-between items-end gap-6 mb-8 md:mb-11">
       <div class="flex flex-col gap-3.5 max-w-[640px]">
         <span class="eyebrow">OUR WORK</span>
-        <h2 class="section-title">ผลงานของเรา</h2>
-        <p class="section-lead">ตัวอย่างงานและเอกสารที่เกี่ยวข้องกับการให้บริการของเรา</p>
+        <h2 data-i18n="work.title" class="section-title">ผลงานของเรา</h2>
+        <p data-i18n="work.lead" class="section-lead">ตัวอย่างงานและเอกสารที่เกี่ยวข้องกับการให้บริการของเรา</p>
       </div>
       <div class="flex gap-2.5">
         <button id="wPrev" aria-label="Previous" class="w-12 h-12 rounded-full bg-white shadow-card text-brand text-xl flex items-center justify-center hover:bg-ink hover:text-white transition"><i data-lucide="chevron-left"></i></button>
@@ -277,30 +303,30 @@ tailwind.config = {
 <!-- FAQ -->
 <section id="faq" class="bg-white scroll-mt-16">
   <div class="container-x pt-16 md:pt-28 grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-16">
-    <div class="reveal flex flex-col gap-3.5 lg:sticky lg:top-28 self-start">
+    <div data-aos="fade-up" class="flex flex-col gap-3.5 lg:sticky lg:top-28 self-start">
       <span class="eyebrow">FAQ</span>
-      <h2 class="section-title">คำถามที่พบบ่อย</h2>
-      <p class="text-base md:text-lg leading-relaxed text-muted">รวมคำถามที่ลูกค้าสอบถามบ่อยเกี่ยวกับวีซ่าและใบอนุญาตทำงาน หากไม่พบคำตอบที่ต้องการ สามารถสอบถามเจ้าหน้าที่ได้โดยตรง</p>
-      <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" class="self-start mt-2 flex items-center gap-2 font-semibold text-[15px] text-brand hover:text-ink py-2.5">สอบถามเพิ่มเติมทาง LINE <i data-lucide="arrow-right"></i></a>
+      <h2 data-i18n="faq.title" class="section-title">คำถามที่พบบ่อย</h2>
+      <p data-i18n="faq.lead" class="text-base md:text-lg leading-relaxed text-muted">รวมคำถามที่ลูกค้าสอบถามบ่อยเกี่ยวกับวีซ่าและใบอนุญาตทำงาน หากไม่พบคำตอบที่ต้องการ สามารถสอบถามเจ้าหน้าที่ได้โดยตรง</p>
+      <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" class="self-start mt-2 flex items-center gap-2 font-semibold text-[15px] text-brand hover:text-ink py-2.5"><span data-i18n="faq.more">สอบถามเพิ่มเติมทาง LINE</span> <i data-lucide="arrow-right"></i></a>
     </div>
-    <div class="reveal flex flex-col gap-3" id="faqList"></div>
+    <div data-aos="fade-up" class="flex flex-col gap-3" id="faqList"></div>
   </div>
 </section>
 
 <!-- FINAL CTA -->
 <section id="contact" class="bg-white scroll-mt-16">
   <div class="container-x py-16 md:py-26">
-    <div class="reveal relative overflow-hidden rounded-[28px] md:rounded-loom bg-off p-9 md:p-18 grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+    <div data-aos="fade-up" class="relative overflow-hidden rounded-[28px] md:rounded-loom bg-off p-9 md:p-18 grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
       <div class="absolute -right-30 -top-40 w-[480px] h-[480px] rounded-full border border-white/10"></div>
       <div class="absolute -right-10 -top-20 w-80 h-80 rounded-full border border-white/10"></div>
       <div class="relative flex flex-col gap-5">
-        <h2 class="text-[28px] md:text-[46px] leading-[1.3] font-extrabold text-white text-balance">ไม่แน่ใจว่าคุณต้องใช้วีซ่าประเภทไหน?</h2>
-        <p class="text-[17px] leading-[1.75] text-fog-200 max-w-[520px]">ให้ทีมงานช่วยประเมินเบื้องต้น พร้อมแนะนำเอกสารและขั้นตอนที่เหมาะสมกับกรณีของคุณ</p>
+        <h2 data-i18n="contact.title" class="text-[28px] md:text-[46px] leading-[1.3] font-extrabold text-white text-balance">ไม่แน่ใจว่าคุณต้องใช้วีซ่าประเภทไหน?</h2>
+        <p data-i18n="contact.lead" class="text-[17px] leading-[1.75] text-fog-200 max-w-[520px]">ให้ทีมงานช่วยประเมินเบื้องต้น พร้อมแนะนำเอกสารและขั้นตอนที่เหมาะสมกับกรณีของคุณ</p>
         <div class="flex flex-col sm:flex-row gap-3 mt-2">
-          <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" class="btn btn-line"><img src="assets/img/line-cta.webp" alt="" class="w-6 h-6 flex-none">ปรึกษาผ่าน LINE</a>
-          <a href="tel:+6626426866" class="btn btn-call"><i data-lucide="phone" class="text-lg"></i>โทรหาเรา</a>
+          <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" class="btn btn-line"><img src="assets/img/line-cta.webp" alt="" class="w-6 h-6 flex-none"><span data-i18n="cta.line">ปรึกษาผ่าน LINE</span></a>
+          <a href="tel:+6626426866" class="btn btn-call"><i data-lucide="phone" class="text-lg"></i><span data-i18n="cta.call">โทรหาเรา</span></a>
         </div>
-        <p class="flex items-center gap-2 text-sm text-fog-300"><span class="w-2 h-2 rounded-full bg-accent"></span>พูดคุยกับเจ้าหน้าที่เพื่อประเมินเบื้องต้น</p>
+        <p class="flex items-center gap-2 text-sm text-fog-300"><span class="w-2 h-2 rounded-full bg-accent"></span><span data-i18n="contact.note">พูดคุยกับเจ้าหน้าที่เพื่อประเมินเบื้องต้น</span></p>
       </div>
       <div class="relative aspect-[5/4] rounded-[28px] overflow-hidden">
         <img src="https://images.unsplash.com/photo-1655722724451-0df658a2ab23?auto=format&fit=crop&w=1000&q=75" alt="Passport on world map" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
@@ -317,7 +343,7 @@ tailwind.config = {
         <span class="rounded-2xl bg-white px-3.5 py-2.5"><img src="assets/img/fdi-logo.webp" alt="FDI Accounting &amp; Advisory" width="439" height="204" class="h-10 w-auto"></span>
         <span class="font-extrabold text-[15px] tracking-wide text-white">VISA &amp; WORK PERMIT</span>
       </div>
-      <p class="text-[14.5px] leading-[1.75] max-w-[300px]">ให้คำปรึกษาและดำเนินการด้านวีซ่า ใบอนุญาตทำงาน และเอกสารสำหรับชาวต่างชาติในประเทศไทย</p>
+      <p data-i18n="footer.desc" class="text-[14.5px] leading-[1.75] max-w-[300px]">ให้คำปรึกษาและดำเนินการด้านวีซ่า ใบอนุญาตทำงาน และเอกสารสำหรับชาวต่างชาติในประเทศไทย</p>
     </div>
     <div class="footer-col">
       <span class="footer-title">SERVICES</span>
@@ -337,12 +363,12 @@ tailwind.config = {
       </span>
       <a href="mailto:infojob@fdi.co.th" class="hover:text-white">infojob@fdi.co.th</a>
       <a href="https://www.fdi.co.th" target="_blank" rel="noopener" class="hover:text-white">www.fdi.co.th</a>
-      <span class="leading-[1.7]"><span class="text-white font-semibold">สำนักงานใหญ่</span><br>เลขที่ 41 ชั้น 14 ห้อง 1403-1405 อาคารเลิศปัญญา ซอยเลิศปัญญา ถนนศรีอยุธยา แขวงถนนพญาไท เขตราชเทวี กรุงเทพฯ 10400</span>
+      <span data-i18n="footer.addr" class="leading-[1.7]"><span class="text-white font-semibold">สำนักงานใหญ่</span><br>เลขที่ 41 ชั้น 14 ห้อง 1403-1405 อาคารเลิศปัญญา ซอยเลิศปัญญา ถนนศรีอยุธยา แขวงถนนพญาไท เขตราชเทวี กรุงเทพฯ 10400</span>
     </div>
     <div class="footer-col">
       <span class="footer-title">BUSINESS HOURS</span>
-      <span>จันทร์ – ศุกร์ · 08:30 – 17:00 น.</span>
-      <span>เสาร์ – อาทิตย์ · ปิดทำการ</span>
+      <span data-i18n="footer.hours1">จันทร์ – ศุกร์ · 08:30 – 17:00 น.</span>
+      <span data-i18n="footer.hours2">เสาร์ – อาทิตย์ · ปิดทำการ</span>
     </div>
   </div>
   <div class="container-x pt-10 pb-28">
@@ -355,14 +381,19 @@ tailwind.config = {
 
 <!-- FLOATING CTA (shows after scrolling 100px) -->
 <div id="floatCta" class="fixed right-4 bottom-4 md:right-6 md:bottom-6 z-40 flex flex-col items-end gap-2.5 pointer-events-none">
-  <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" class="fc-item flex items-center gap-2 h-11 px-5 rounded-full bg-brand text-white font-bold text-[15px] shadow-btn hover:bg-brand-dark" style="--i:0"><img src="assets/img/line-cta.webp" alt="" class="w-6 h-6 flex-none">LINE</a>
-  <a href="tel:+6626426866" aria-label="โทรหาเรา" class="fc-item flex items-center gap-2 h-11 px-5 rounded-full bg-ink text-white font-semibold text-sm shadow-btn hover:bg-off" style="--i:1"><i data-lucide="phone" class="text-lg"></i>โทรหาเรา</a>
-  <a href="#top" aria-label="กลับขึ้นด้านบน" class="fc-item w-11 h-11 rounded-full bg-white text-ink border border-sky text-xl shadow-btn flex items-center justify-center hover:bg-sky hover:text-brand" style="--i:2"><i data-lucide="arrow-up"></i></a>
+  <div class="fc-item flex gap-2" style="--i:0">
+    <a href="https://www.youtube.com/@fdigroup_Official" target="_blank" rel="noopener" aria-label="YouTube" class="fc-social" style="--c:#FF0000"><svg><use href="#ic-youtube"/></svg></a>
+    <a href="https://www.facebook.com/fdiaccounting" target="_blank" rel="noopener" aria-label="Facebook" class="fc-social" style="--c:#1877F2"><svg><use href="#ic-facebook"/></svg></a>
+    <a href="https://www.tiktok.com/@fdigroup_official" target="_blank" rel="noopener" aria-label="TikTok" class="fc-social" style="--c:#000"><svg><use href="#ic-tiktok"/></svg></a>
+  </div>
+  <a href="https://line.me/R/ti/p/@fdigroup" target="_blank" rel="noopener" class="fc-item flex items-center gap-2 h-11 px-5 rounded-full bg-brand text-white font-bold text-[15px] shadow-btn hover:bg-brand-dark" style="--i:1"><img src="assets/img/line-cta.webp" alt="" class="w-6 h-6 flex-none">LINE</a>
+  <a href="tel:+6626426866" aria-label="โทรหาเรา" data-i18n-attr="aria-label:cta.call" class="fc-item flex items-center gap-2 h-11 px-5 rounded-full bg-ink text-white font-semibold text-sm shadow-btn hover:bg-off" style="--i:2"><i data-lucide="phone" class="text-lg"></i><span data-i18n="cta.call">โทรหาเรา</span></a>
+  <a href="#top" aria-label="กลับขึ้นด้านบน" data-i18n-attr="aria-label:a11y.top" class="fc-item w-11 h-11 rounded-full bg-white text-ink border border-sky text-xl shadow-btn flex items-center justify-center hover:bg-sky hover:text-brand" style="--i:3"><i data-lucide="arrow-up"></i></a>
 </div>
 
 <!-- LIGHTBOX -->
 <div id="lightbox" class="modal-bg fixed inset-0 z-[110] hidden opacity-0 bg-[rgba(12,30,66,.92)] flex-col items-center justify-center gap-4 p-6">
-  <button data-lb-close aria-label="ปิด" class="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/10 text-white text-xl flex items-center justify-center"><i data-lucide="x"></i></button>
+  <button data-lb-close aria-label="ปิด" data-i18n-attr="aria-label:a11y.close" class="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/10 text-white text-xl flex items-center justify-center"><i data-lucide="x"></i></button>
   <img id="lbImg" alt="" class="w-[min(92vw,640px)] max-h-[72vh] aspect-[4/5] object-cover rounded-[28px]">
   <div class="flex items-center gap-4 text-white">
     <button id="lbPrev" aria-label="Previous" class="w-11 h-11 rounded-full bg-white/10 text-xl flex items-center justify-center"><i data-lucide="chevron-left"></i></button>
@@ -376,141 +407,141 @@ tailwind.config = {
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="assets/i18n.js"></script>
 <script>
-/* ============ Content ============ */
-const SVC_MAIN = [
-  ['briefcase', 'วีซ่าทำงานและใบอนุญาตทำงาน', 'บริการขอ Visa & Work Permit สำหรับชาวต่างชาติที่เดินทางมาทำงานในประเทศไทย'],
-  ['plane-takeoff', 'วีซ่าสำหรับคนไทยไปต่างประเทศ', 'บริการขอวีซ่าสำหรับคนไทยที่เดินทางไปต่างประเทศ'],
-  ['refresh-cw', 'ต่ออายุวีซ่า / ใบอนุญาตทำงาน', 'สำหรับชาวต่างชาติที่กำลังทำงานอยู่ในประเทศไทย'],
-  ['stamp', 'ตัวแทนขอรับรองเอกสาร', 'ติดต่อขอรับรองเอกสารจากกรมการกงสุล / สถานทูต / ทนาย'],
-  ['scale', 'ที่ปรึกษาด้านเอกสาร', 'แก้ไขหรือเปลี่ยนแปลงเอกสาร โดยปฏิบัติตามข้อกฎหมายอย่างถูกต้อง'],
-  ['messages-square', 'ที่ปรึกษาแบบครบวงจร', 'ให้คำปรึกษาด้านการยื่นขอวีซ่าและใบอนุญาตทำงานแบบครบวงจรในที่เดียว']
-];
-const SVC_INBOUND = [
-  'บริการให้คำปรึกษา แนะนำโดยผู้เชี่ยวชาญด้านวีซ่าและใบอนุญาตทำงาน',
-  'บริการจัดเตรียมเอกสารและดำเนินการขอวีซ่าประเภทต่าง ๆ สำหรับชาวต่างชาติ',
-  'บริการยื่นขอใบอนุญาตการทำงานในประเทศไทย',
-  'บริการเป็นตัวแทนยื่นต่ออายุวีซ่าและใบอนุญาตการทำงาน',
-  'บริการเป็นตัวแทนติดต่อขอรับรองเอกสารจากกรมการกงสุล กระทรวงการต่างประเทศ',
-  'บริการเป็นตัวแทนติดต่อขอรับรองเอกสารจากสถานทูต',
-  'บริการติดต่อขอรับรองเอกสารจากทนาย'
-];
-const SVC_OUTBOUND = [
-  'ช่วยเหลือการจัดเตรียมเอกสารขอวีซ่าในต่างประเทศ',
-  'ประสานงานด้านการรับรองเอกสารต่าง ๆ เพื่อนำไปใช้ในต่างประเทศ ทั้งสำหรับการขอใบอนุญาตการทำงาน ลดหย่อนภาษี จดจัดตั้งบริษัท ฯลฯ'
-];
-const SVC_DOCS = ['ใบรับรองผลตรวจประวัติอาชญากรรม','หนังสือเดินทาง','วุฒิการศึกษา','หนังสือรับรองประสบการณ์การทำงาน','ผลตรวจสุขภาพ','สูติบัตร','ทะเบียนสมรส','ใบสำคัญการเปลี่ยนชื่อตัว / ชื่อสกุล','หนังสือรับรองบริษัท'];
-const WHY = [
-  ['users-round','ให้คำปรึกษาด้วยทีมงานที่มีประสบการณ์','ทีมที่ปรึกษาในเครือ FDI Group ดูแลผู้ประกอบการทั้งไทยและต่างชาติมาตั้งแต่ปี 2546 และสื่อสารได้ 4 ภาษา: ไทย อังกฤษ ญี่ปุ่น และจีน'],
-  ['hand-coins','ค่าบริการเหมาะสม คุ้มค่า','แจ้งราคาชัดเจนก่อนเริ่มใช้บริการ เลือกได้ทั้งแบบรายครั้งหรือแพ็กเกจตามความต้องการของแต่ละกรณี'],
-  ['timer','รวดเร็ว ประหยัดเวลา และมีประสิทธิภาพ','แนะนำและตรวจสอบเอกสารตั้งแต่เบื้องต้น เพื่อให้การยื่นเรื่องเป็นไปอย่างราบรื่นและประหยัดเวลาในการดำเนินงาน']
-];
-const STEPS = [
-  ['messages-square','ร่วมพูดคุยและปรึกษา','จากทีมที่ปรึกษา'],
-  ['receipt-text','ส่งใบเสนอราคา','ลูกค้าตอบรับการดำเนินงาน'],
-  ['folder-open','รวบรวมเอกสาร','ทำแบบฟอร์มยื่นขอ Visa / Work Permit'],
-  ['pen-line','ส่งเอกสารให้ลูกค้า','กรรมการบริษัทลงนาม พร้อมประทับตรา'],
-  ['file-search','ตรวจสอบ','ความถูกต้องของเอกสาร'],
-  ['landmark','ดำเนินการยื่นเอกสาร','ที่ สนง.ตรวจคนเข้าเมือง หรือกรมจัดหางาน'],
-  ['calendar-clock','รอผลพิจารณา','', ['Visa 15–30 วันทำการ*', 'Work Permit 7–15 วันทำการ**']],
-  ['handshake','ดำเนินการเสร็จสิ้น','และบริการให้คำปรึกษาอื่น ๆ เพิ่มเติม']
-];
-const WORKS = [
-  ['1581553673739-c4906b5d0de8','WORK PERMIT','ใบอนุญาตทำงาน'],
-  ['1655722725332-9925c96dd627','NON-B VISA','วีซ่าทำงาน / ธุรกิจ'],
-  ['1454496406107-dc34337da8d6','ELITE VISA','วีซ่าพำนักระยะยาว'],
-  ['1553697388-94e804e2f0f6','RETIREMENT','วีซ่าเกษียณอายุ'],
-  ['1654163601053-ea0362be3429','MARRIAGE','วีซ่าสำหรับแต่งงาน'],
-  ['1532188142562-df556b861e6a','TEACHER','วีซ่าทำงานครู'],
-  ['1654163600133-452eb7274426','90 DAYS','แจ้งอยู่เกิน 90 วัน'],
-  ['1655722724447-2d2a3071e7f8','RE-ENTRY','Re-entry Permit'],
-  ['1530469525856-cf37954301f7','CONSULTATION','ให้คำปรึกษาลูกค้า'],
-  ['1654163601023-88f6ba22b2c7','EXTENSION','ต่ออายุวีซ่า']
-];
-const FAQ = [
-  ['วีซ่าทำงาน (Non-B) กับ Work Permit ต่างกันอย่างไร?', 'วีซ่า (Non-B) เป็นการอนุญาตให้ "เดินทางเข้าประเทศ" ออกโดยกระทรวงการต่างประเทศหรือสำนักงานตรวจคนเข้าเมือง ส่วนใบอนุญาตทำงาน (Work Permit) เป็นใบอนุญาตให้ "ทำงานอย่างถูกต้องตามกฎหมาย" ในประเทศไทย ออกโดยกระทรวงแรงงาน (กรมการจัดหางาน) โดยต้องมีวีซ่าก่อนจึงจะขอ Work Permit ได้'],
-  ['FDI ให้บริการอะไรบ้างเกี่ยวกับ Visa & Work Permit?', 'ให้บริการตั้งแต่ให้คำปรึกษา แนะนำการเตรียมเอกสาร การวางแผนดำเนินงาน การพาติดต่อเจ้าหน้าที่ และให้คำแนะนำอย่างตรงจุดที่จะช่วยให้คุณประหยัดเวลาในการดำเนินงาน ครบทุกด้านที่เกี่ยวกับ Visa & Work Permit'],
-  ['หาก Work Permit หมดอายุ ต้องทำอย่างไร?', 'หากพบว่าหมดอายุต้องดำเนินการทันที เช่น ให้ชาวต่างชาติหยุดทำงานชั่วคราว และเตรียมเอกสารพร้อมดำเนินการต่ออายุทันที หากกังวลในส่วนนี้สามารถปรึกษาผู้เชี่ยวชาญของ FDI A&A ได้ทันที เพื่อช่วยไขข้อสงสัยและลดปัญหาต่าง ๆ ซึ่งอาจมีค่าปรับ รวมถึงการหมดสภาพของ Work Permit'],
-  ['มีบริการทุกวันหรือไม่?', 'บริษัทเปิดให้บริการทุกวันจันทร์ – ศุกร์ เวลา 08.30 – 17.00 น. และปิดทำการวันเสาร์และอาทิตย์'],
-  ['ให้บริการสื่อสาร ประสานงาน ได้กี่ภาษา?', 'สามารถให้บริการได้ 4 ภาษา คือ ภาษาไทย ภาษาอังกฤษ ภาษาญี่ปุ่น และภาษาจีน'],
-  ['ค่าบริการครั้งละเท่าไหร่?', 'ให้บริการทั้งแบบรายครั้งและแบบแพ็กเกจ เนื่องจากเอกสารและการดำเนินการของแต่ละบุคคลไม่เหมือนกัน สามารถสอบถามราคาและโปรโมชั่นได้ที่เจ้าหน้าที่โดยตรง']
-];
 /* ============ Helpers ============ */
 const $ = sel => document.querySelector(sel);
 const $$ = sel => document.querySelectorAll(sel);
 const pad = n => String(n).padStart(2, '0');
 const unsplash = (id, w) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=75`;
 const render = (sel, items, tpl) => { $(sel).innerHTML = items.map(tpl).join(''); };
+const WORKS_COUNT = CONTENT.th.WORKS.length;
+
+/* ============ i18n (TH / EN) ============ */
+// Thai lives in the HTML; English comes from I18N_EN / CONTENT.en (assets/i18n.js)
+const LANGS = ['th', 'en'];
+const storage = {
+  get: k => { try { return localStorage.getItem(k); } catch { return null; } },
+  set: (k, v) => { try { localStorage.setItem(k, v); } catch {} }
+};
+let lang = LANGS.includes(storage.get('lang')) ? storage.get('lang') : 'th';
+let aosReady = false;
+const thHtml = new WeakMap(), thAttr = new WeakMap();
+
+function translateStatic() {
+  document.documentElement.lang = lang;
+  $$('[data-i18n]').forEach(el => {
+    if (!thHtml.has(el)) thHtml.set(el, el.innerHTML);
+    el.innerHTML = lang === 'th' ? thHtml.get(el) : I18N_EN[el.dataset.i18n] ?? thHtml.get(el);
+  });
+  $$('[data-i18n-attr]').forEach(el => {
+    if (!thAttr.has(el)) thAttr.set(el, {});
+    const orig = thAttr.get(el);
+    el.dataset.i18nAttr.split(';').forEach(pair => {
+      const [attr, key] = pair.split(':');
+      if (!(attr in orig)) orig[attr] = el.getAttribute(attr);
+      el.setAttribute(attr, lang === 'th' ? orig[attr] : I18N_EN[key] ?? orig[attr]);
+    });
+  });
+}
 
 /* ============ Render sections ============ */
-// Services
-render('#svcMain', SVC_MAIN, ([ic, t, d]) => `
-  <div class="reveal group bg-white rounded-[28px] md:rounded-[32px] p-6 md:p-7 flex flex-col gap-3 shadow-card hover:-translate-y-1 hover:shadow-lift transition duration-300">
-    <span class="w-12 h-12 rounded-2xl bg-sky text-brand text-[22px] flex items-center justify-center group-hover:bg-brand group-hover:text-white transition"><i data-lucide="${ic}"></i></span>
-    <h3 class="mt-auto text-[17px] leading-[1.4] font-extrabold">${t}</h3>
-    <p class="text-[14.5px] leading-[1.65] text-muted">${d}</p>
-  </div>`);
+function renderContent() {
+  const { SVC_MAIN, SVC_INBOUND, SVC_OUTBOUND, SVC_DOCS, WHY, STEPS, FAQ } = CONTENT[lang];
+  // Services
+  render('#svcMain', SVC_MAIN, ([ic, t, d]) => `
+    <div data-aos="fade-up" class="group bg-white rounded-[28px] md:rounded-[32px] p-6 md:p-7 flex flex-col gap-3 shadow-card hover:-translate-y-1 hover:shadow-lift transition duration-300">
+      <span class="w-12 h-12 rounded-2xl bg-sky text-brand text-[22px] flex items-center justify-center group-hover:bg-brand group-hover:text-white transition"><i data-lucide="${ic}"></i></span>
+      <h3 class="mt-auto text-[17px] leading-[1.4] font-extrabold">${t}</h3>
+      <p class="text-[14.5px] leading-[1.65] text-muted">${d}</p>
+    </div>`);
 
-const checkItem = iconClass => t => `
-  <li class="flex items-start gap-2.5 text-[15px] leading-[1.6]"><i data-lucide="circle-check" class="mt-1 flex-none ${iconClass}"></i>${t}</li>`;
-render('#svcInbound', SVC_INBOUND, checkItem('text-white'));
-render('#svcOutbound', SVC_OUTBOUND, checkItem('text-accent'));
-render('#svcDocs', SVC_DOCS, t => `
-  <span class="rounded-full bg-white/10 border border-white/15 px-3 py-1.5 text-[13.5px]">${t}</span>`);
+  const checkItem = iconClass => t => `
+    <li class="flex items-start gap-2.5 text-[15px] leading-[1.6]"><i data-lucide="circle-check" class="mt-1 flex-none ${iconClass}"></i>${t}</li>`;
+  render('#svcInbound', SVC_INBOUND, checkItem('text-white'));
+  render('#svcOutbound', SVC_OUTBOUND, checkItem('text-accent'));
+  render('#svcDocs', SVC_DOCS, t => `
+    <span class="rounded-full bg-white/10 border border-white/15 px-3 py-1.5 text-[13.5px]">${t}</span>`);
 
-// Why us
-render('#whyGrid', WHY, ([ic, t, d], i) => `
-  <div class="reveal group bg-accent-soft rounded-[28px] md:rounded-[36px] p-7 md:p-9 flex flex-col sm:flex-row sm:items-center gap-5 md:gap-7 hover:bg-sky transition duration-300">
-    <span class="flex-none w-16 h-16 md:w-18 md:h-18 rounded-2xl bg-white text-accent-dark text-3xl flex items-center justify-center shadow-card group-hover:text-brand transition"><i data-lucide="${ic}"></i></span>
-    <div class="flex flex-col gap-2">
-      <span class="font-bold text-xs tracking-[.14em] text-accent-dark group-hover:text-brand transition">REASON ${pad(i + 1)}</span>
-      <h3 class="font-extrabold text-xl md:text-[22px] leading-[1.4]">${t}</h3>
-      <p class="text-[15px] leading-[1.7] text-muted">${d}</p>
-    </div>
-  </div>`);
+  // Why us
+  render('#whyGrid', WHY, ([ic, t, d], i) => `
+    <div data-aos="fade-up" class="group bg-accent-soft rounded-[28px] md:rounded-[36px] p-7 md:p-9 flex flex-col sm:flex-row sm:items-center gap-5 md:gap-7 hover:bg-sky transition duration-300">
+      <span class="flex-none w-16 h-16 md:w-18 md:h-18 rounded-2xl bg-white text-accent-dark text-3xl flex items-center justify-center shadow-card group-hover:text-brand transition"><i data-lucide="${ic}"></i></span>
+      <div class="flex flex-col gap-2">
+        <span class="font-bold text-xs tracking-[.14em] text-accent-dark group-hover:text-brand transition">REASON ${pad(i + 1)}</span>
+        <h3 class="font-extrabold text-xl md:text-[22px] leading-[1.4]">${t}</h3>
+        <p class="text-[15px] leading-[1.7] text-muted">${d}</p>
+      </div>
+    </div>`);
 
-// Process
-render('#steps', STEPS, ([ic, t, d, tags], i) => {
-  const last = i === STEPS.length - 1;
-  return `
-  <li class="reveal group relative rounded-[24px] border border-sky ${last ? 'bg-sky' : 'bg-white'} p-5 md:p-6 flex flex-col gap-4 hover:border-line hover:shadow-card transition duration-300">
-    <div class="flex items-center justify-between">
-      <span class="w-12 h-12 rounded-2xl ${last ? 'bg-brand text-white' : 'bg-sky text-brand'} text-2xl flex items-center justify-center"><i data-lucide="${ic}"></i></span>
-      <span class="font-extrabold text-[28px] leading-none ${last ? 'text-brand' : 'text-mint group-hover:text-line'} transition">${pad(i + 1)}</span>
-    </div>
-    <div class="flex flex-col gap-1">
-      <h3 class="text-lg leading-[1.4] font-extrabold">${t}</h3>
-      ${d ? `<p class="text-[15px] leading-[1.6] font-semibold text-brand">${d}</p>` : ''}
-      ${tags ? `<div class="flex flex-wrap gap-1.5 mt-1">${tags.map(x => `<span class="rounded-full bg-brand text-white px-3 py-1 text-[13px] font-semibold">${x}</span>`).join('')}</div>` : ''}
-    </div>
-  </li>`;
-});
+  // Process
+  render('#steps', STEPS, ([ic, t, d, tags], i) => {
+    const last = i === STEPS.length - 1;
+    return `
+    <li data-aos="fade-up" class="group relative rounded-[24px] border border-sky ${last ? 'bg-sky' : 'bg-white'} p-5 md:p-6 flex flex-col gap-4 hover:border-line hover:shadow-card transition duration-300">
+      <div class="flex items-center justify-between">
+        <span class="w-12 h-12 rounded-2xl ${last ? 'bg-brand text-white' : 'bg-sky text-brand'} text-2xl flex items-center justify-center"><i data-lucide="${ic}"></i></span>
+        <span class="font-extrabold text-[28px] leading-none ${last ? 'text-brand' : 'text-mint group-hover:text-line'} transition">${pad(i + 1)}</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <h3 class="text-lg leading-[1.4] font-extrabold">${t}</h3>
+        ${d ? `<p class="text-[15px] leading-[1.6] font-semibold text-brand">${d}</p>` : ''}
+        ${tags ? `<div class="flex flex-wrap gap-1.5 mt-1">${tags.map(x => `<span class="rounded-full bg-brand text-white px-3 py-1 text-[13px] font-semibold">${x}</span>`).join('')}</div>` : ''}
+      </div>
+    </li>`;
+  });
+
+  // FAQ
+  render('#faqList', FAQ, ([q, a], i) => `
+    <details class="faq group rounded-2xl border border-sky bg-white open:bg-sky/50 open:border-line transition-colors"${i === 0 ? ' open' : ''}>
+      <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 md:px-6 py-4 md:py-5">
+        <span class="font-bold text-base md:text-lg leading-snug">${q}</span>
+        <span class="faq-ic flex-none w-8 h-8 rounded-full bg-sky text-brand flex items-center justify-center transition"><i data-lucide="plus"></i></span>
+      </summary>
+      <p class="px-5 md:px-6 pb-5 -mt-1 text-[15px] md:text-base leading-relaxed text-muted">${a}</p>
+    </details>`);
+}
 
 // Our work (slides duplicated so Swiper's loop has enough slides)
-render('#workSlides', [...WORKS, ...WORKS], ([id, tag, cap], j) => `
+render('#workSlides', [...CONTENT.th.WORKS, ...CONTENT.th.WORKS], ([id, tag], j) => `
   <div class="swiper-slide !h-auto">
-    <button data-lb="${j % WORKS.length}" class="group block w-full text-left cursor-zoom-in">
+    <button data-lb="${j % WORKS_COUNT}" class="group block w-full text-left cursor-zoom-in">
       <div class="relative aspect-[4/5] rounded-[36px] overflow-hidden shadow-card bg-sky">
-        <img src="${unsplash(id, 700)}" alt="${cap}" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-105">
+        <img src="${unsplash(id, 700)}" alt="" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-105">
         <div class="absolute inset-x-0 bottom-0 pt-12 px-5 pb-5 bg-gradient-to-b from-transparent to-[rgba(21,70,160,.82)] flex flex-col gap-1">
           <span class="font-semibold text-[11px] tracking-[.1em] text-line">${tag}</span>
-          <span class="text-base font-bold leading-snug text-white">${cap}</span>
+          <span class="w-cap text-base font-bold leading-snug text-white"></span>
         </div>
       </div>
     </button>
   </div>`);
 
-// FAQ
-render('#faqList', FAQ, ([q, a], i) => `
-  <details class="faq group rounded-2xl border border-sky bg-white open:bg-sky/50 open:border-line transition-colors"${i === 0 ? ' open' : ''}>
-    <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 md:px-6 py-4 md:py-5">
-      <span class="font-bold text-base md:text-lg leading-snug">${q}</span>
-      <span class="faq-ic flex-none w-8 h-8 rounded-full bg-sky text-brand flex items-center justify-center transition"><i data-lucide="plus"></i></span>
-    </summary>
-    <p class="px-5 md:px-6 pb-5 -mt-1 text-[15px] md:text-base leading-relaxed text-muted">${a}</p>
-  </details>`);
+function localizeWorks() {
+  $$('#workSlides [data-lb]').forEach(b => {
+    const cap = CONTENT[lang].WORKS[b.dataset.lb][2];
+    b.querySelector('img').alt = cap;
+    b.querySelector('.w-cap').textContent = cap;
+  });
+}
 
-lucide.createIcons();
+function applyLang() {
+  translateStatic();
+  renderContent();
+  localizeWorks();
+  lucide.createIcons();
+  $('#langCur').textContent = lang.toUpperCase();
+  $$('[data-lang]').forEach(b => b.setAttribute('aria-checked', b.dataset.lang === lang));
+  // Re-rendered cards are already on screen — show them without replaying AOS
+  if (aosReady) { $$('[data-aos]:not(.aos-animate)').forEach(el => el.classList.add('aos-animate')); AOS.refresh(); }
+}
+function setLang(next) {
+  if (!LANGS.includes(next) || next === lang) return;
+  lang = next;
+  storage.set('lang', lang);
+  applyLang();
+}
+applyLang();
 
 /* ============ Interactions ============ */
 // Navbar shrink + floating CTA visibility
@@ -537,13 +568,28 @@ menuBtn.addEventListener('click', () => setMenu(!menu.classList.contains('open')
 $$('.m-link').forEach(a => a.addEventListener('click', () => setMenu(false)));
 matchMedia('(min-width: 1091px)').addEventListener('change', e => e.matches && setMenu(false));
 
-// Reveal on scroll
-const io = new IntersectionObserver(entries => entries.forEach(e => {
-  if (!e.isIntersecting) return;
-  e.target.classList.add('in');
-  io.unobserve(e.target);
-}), { rootMargin: '0px 0px -8% 0px' });
-$$('.reveal').forEach(el => io.observe(el));
+// Language dropdown
+const langSwitch = $('#langSwitch'), langBtn = $('#langBtn');
+const isLangOpen = () => langSwitch.classList.contains('open');
+function setLangMenu(open) {
+  langSwitch.classList.toggle('open', open);
+  langBtn.setAttribute('aria-expanded', open);
+}
+langBtn.addEventListener('click', () => setLangMenu(!isLangOpen()));
+$$('[data-lang]').forEach(b => b.addEventListener('click', () => {
+  setLang(b.dataset.lang);
+  setLangMenu(false);
+  langBtn.focus();
+}));
+document.addEventListener('click', e => { if (!langSwitch.contains(e.target)) setLangMenu(false); });
+
+// Reveal on scroll (AOS) — start after the preloader so the hero animates in view
+const initAos = () => (aosReady = true, AOS.init({
+  once: true, duration: 600, easing: 'ease-out-cubic', offset: 60,
+  disable: () => matchMedia('(prefers-reduced-motion: reduce)').matches
+}));
+if (window.preloaderDone) initAos();
+else addEventListener('preloader:done', initAos, { once: true });
 
 // Overlay helpers (lightbox)
 function openLayer(el) {
@@ -565,19 +611,19 @@ const swiper = new Swiper('#workSwiper', {
   autoplay: { delay: 3200, disableOnInteraction: false, pauseOnMouseEnter: true },
   breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 }, 1280: { slidesPerView: 4 } },
   navigation: { prevEl: '#wPrev', nextEl: '#wNext' },
-  pagination: { el: '#wPag', clickable: true, renderBullet: (i, cls) => i < WORKS.length ? `<span class="${cls}"></span>` : '' },
-  on: { slideChange(s) { s.pagination.bullets.forEach((b, k) => b.classList.toggle('swiper-pagination-bullet-active', k === s.realIndex % WORKS.length)); } }
+  pagination: { el: '#wPag', clickable: true, renderBullet: (i, cls) => i < WORKS_COUNT ? `<span class="${cls}"></span>` : '' },
+  on: { slideChange(s) { s.pagination.bullets.forEach((b, k) => b.classList.toggle('swiper-pagination-bullet-active', k === s.realIndex % WORKS_COUNT)); } }
 });
 
 // Lightbox
 const lb = $('#lightbox');
 let lbIndex = 0;
 function fillLb(i) {
-  lbIndex = (i + WORKS.length) % WORKS.length;
-  const [id, , cap] = WORKS[lbIndex];
+  lbIndex = (i + WORKS_COUNT) % WORKS_COUNT;
+  const [id, , cap] = CONTENT[lang].WORKS[lbIndex];
   Object.assign($('#lbImg'), { src: unsplash(id, 1400), alt: cap });
   $('#lbCap').textContent = cap;
-  $('#lbCount').textContent = `${lbIndex + 1} / ${WORKS.length}`;
+  $('#lbCount').textContent = `${lbIndex + 1} / ${WORKS_COUNT}`;
 }
 function closeLb() { closeLayer(lb); swiper.autoplay.start(); }
 document.addEventListener('click', e => {
@@ -594,7 +640,8 @@ $('#lbNext').addEventListener('click', e => { e.stopPropagation(); fillLb(lbInde
 // ESC closes top layer
 addEventListener('keydown', e => {
   if (e.key !== 'Escape') return;
-  if (!lb.classList.contains('hidden')) closeLb();
+  if (isLangOpen()) { setLangMenu(false); langBtn.focus(); }
+  else if (!lb.classList.contains('hidden')) closeLb();
   else setMenu(false);
 });
 </script>

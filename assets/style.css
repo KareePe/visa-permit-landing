@@ -18,18 +18,7 @@
 }
 
 /* ---------- Fonts & preloader ---------- */
-/* LINE Seed Sans — EN */
-@font-face { font-family:'LINE Seed Sans'; src:url('fonts/LINESeedSans_W_Th.woff2') format('woff2'); font-weight:100 300; font-style:normal; font-display:swap; }
-@font-face { font-family:'LINE Seed Sans'; src:url('fonts/LINESeedSans_W_Rg.woff2') format('woff2'); font-weight:400 500; font-style:normal; font-display:swap; }
-@font-face { font-family:'LINE Seed Sans'; src:url('fonts/LINESeedSans_W_Bd.woff2') format('woff2'); font-weight:600 700; font-style:normal; font-display:swap; }
-@font-face { font-family:'LINE Seed Sans'; src:url('fonts/LINESeedSans_W_XBd.woff2') format('woff2'); font-weight:800; font-style:normal; font-display:swap; }
-@font-face { font-family:'LINE Seed Sans'; src:url('fonts/LINESeedSans_W_He.woff2') format('woff2'); font-weight:900; font-style:normal; font-display:swap; }
-/* LINE Seed Sans TH — TH */
-@font-face { font-family:'LINE Seed Sans TH'; src:url('fonts/LINESeedSansTH_W_Th.woff2') format('woff2'); font-weight:100 300; font-style:normal; font-display:swap; }
-@font-face { font-family:'LINE Seed Sans TH'; src:url('fonts/LINESeedSansTH_W_Rg.woff2') format('woff2'); font-weight:400 500; font-style:normal; font-display:swap; }
-@font-face { font-family:'LINE Seed Sans TH'; src:url('fonts/LINESeedSansTH_W_Bd.woff2') format('woff2'); font-weight:600 700; font-style:normal; font-display:swap; }
-@font-face { font-family:'LINE Seed Sans TH'; src:url('fonts/LINESeedSansTH_W_XBd.woff2') format('woff2'); font-weight:800; font-style:normal; font-display:swap; }
-@font-face { font-family:'LINE Seed Sans TH'; src:url('fonts/LINESeedSansTH_W_He.woff2') format('woff2'); font-weight:900; font-style:normal; font-display:swap; }
+/* Font: Noto Sans Thai (Google Fonts, loaded in index.html) */
 /* Preloader — plain CSS so it renders before Tailwind is ready */
 #preloader { position:fixed; inset:0; z-index:200; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; background:#fff; transition:opacity .5s ease, visibility .5s ease; }
 #preloader.done { opacity:0; visibility:hidden; }
@@ -77,6 +66,31 @@
 .btn-call { background:#fff; color:var(--ink); }
 .btn-call:hover { background:var(--sky); }
 
+/* Hero CTA — periodic bounce + pulse ring (LINE), ringing phone icon (Call) */
+.cta-bounce { position:relative; animation:ctaBounce 2.8s var(--ease-out) 1.2s infinite; }
+.cta-bounce::after { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; animation:ctaPulse 2.8s ease-out 1.2s infinite; }
+.cta-ring svg { transform-origin:50% 50%; animation:ctaRing 2.8s ease-in-out 1.6s infinite; }
+.cta-bounce:hover { animation:none; }
+.cta-bounce:hover, .cta-ring:hover { transform:translateY(-3px) scale(1.04); }
+.cta-bounce:active, .cta-ring:active { transform:scale(.96); }
+@keyframes ctaBounce {
+  0%, 40%, 100% { transform:translateY(0) scale(1); }
+  10% { transform:translateY(-7px) scale(1.03); }
+  20% { transform:translateY(0) scale(.98, 1.02); }
+  28% { transform:translateY(-3px) scale(1.01); }
+}
+@keyframes ctaPulse {
+  0% { box-shadow:0 0 0 0 rgb(24 168 76 / .55); }
+  45%, 100% { box-shadow:0 0 0 14px rgb(24 168 76 / 0); }
+}
+@keyframes ctaRing {
+  0%, 30%, 100% { transform:rotate(0); }
+  5%, 15% { transform:rotate(-14deg); }
+  10%, 20% { transform:rotate(14deg); }
+  25% { transform:rotate(-6deg); }
+}
+@media (prefers-reduced-motion: reduce) { .cta-bounce, .cta-bounce::after, .cta-ring svg { animation:none; } }
+
 /* ---------- Hero trust bar ---------- */
 .trust-item { display:flex; align-items:center; gap:.625rem; font-size:.875rem; line-height:1.25rem; font-weight:600; color:#fff; }
 .trust-ic { flex:none; display:flex; align-items:center; justify-content:center; width:1.75rem; height:1.75rem; border-radius:9999px; background:rgb(255 255 255 / .15); font-size:15px; }
@@ -88,13 +102,35 @@
 /* ---------- Effects ---------- */
 [data-lucide] { width:1em; height:1em; }
 
-/* Reveal on scroll */
-.reveal { opacity:0; transform:translateY(18px); transition:opacity .5s ease, transform .5s var(--ease-out); }
-.reveal.in { opacity:1; transform:none; }
+/* Reveal on scroll (AOS) — AOS limits transitions to opacity/transform and locks transform
+   after animating; restore hover transitions + lift on cards that use Tailwind `transition` */
+[data-aos][data-aos].transition { transition-property:opacity, transform, box-shadow, background-color, border-color; }
+[data-aos].aos-animate.hover\:-translate-y-1:hover { transform:translate3d(0,-.25rem,0); }
+
+/* Language dropdown (header) */
+.lang-menu { position:absolute; right:0; top:calc(100% + .5rem); z-index:10; width:10rem; padding:.375rem; border-radius:1rem; background:#fff; border:1px solid var(--sky); box-shadow:var(--shadow-btn); opacity:0; visibility:hidden; transform:translateY(-6px) scale(.98); transform-origin:top right; transition:opacity .15s var(--ease-ui), transform .15s var(--ease-ui), visibility .15s; }
+#langSwitch.open .lang-menu { opacity:1; visibility:visible; transform:none; }
+.lang-chev { transition:transform .2s var(--ease-ui); }
+#langSwitch.open .lang-chev { transform:rotate(180deg); }
+.lang-opt { display:flex; width:100%; align-items:center; justify-content:space-between; padding:.625rem .75rem; border-radius:.75rem; font-size:14px; font-weight:500; color:var(--ink); transition:background-color .15s var(--ease-ui); }
+.lang-opt span { font-size:12px; font-weight:700; letter-spacing:.06em; color:var(--muted); }
+.lang-opt:hover { background:var(--sky); }
+.lang-opt[aria-checked="true"] { background:var(--sky); color:var(--brand); font-weight:700; }
+.lang-opt[aria-checked="true"] span { color:var(--brand); }
 
 /* Floating CTA: hidden until scrolled, items slide in top → bottom */
 #floatCta .fc-item { opacity:0; transform:translateY(-12px) scale(.96); pointer-events:none; transition:opacity .25s ease, transform .3s ease, background-color .2s; }
 #floatCta.show .fc-item { opacity:1; transform:none; pointer-events:auto; transition:opacity .35s ease calc(var(--i) * 70ms), transform .45s var(--ease-out) calc(var(--i) * 70ms), background-color .2s; }
+
+/* Social buttons — --c is the brand color set inline per network */
+.social-btn, .fc-social { display:flex; align-items:center; justify-content:center; border-radius:9999px; transition:background-color .2s var(--ease-ui), color .2s var(--ease-ui), border-color .2s var(--ease-ui), transform .2s var(--ease-ui); }
+.social-btn svg, .fc-social svg { width:18px; height:18px; }
+/* Hero (on blue): quiet translucent circles, fill with brand color on hover */
+.social-btn { width:2.5rem; height:2.5rem; color:#fff; background:rgb(255 255 255 / .1); border:1px solid rgb(255 255 255 / .2); }
+.social-btn:hover { background:var(--c); border-color:var(--c); transform:translateY(-2px); }
+/* Floating: small white circles with brand-colored icons */
+.fc-social { width:2.25rem; height:2.25rem; color:var(--c); background:#fff; border:1px solid var(--sky); box-shadow:var(--shadow-btn); }
+.fc-social:hover { background:var(--c); border-color:var(--c); color:#fff; transform:translateY(-2px); }
 
 /* FAQ accordion */
 .faq summary::-webkit-details-marker { display:none; }
