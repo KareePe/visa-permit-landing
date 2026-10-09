@@ -1,0 +1,14 @@
+{
+  "name": "visa-permit-landing",
+  "private": true,
+  "scripts": {
+    "build": "npm run build:css && npm run build:seo",
+    "build:css": "tailwindcss -i assets/src/app.css -o assets/app.css --minify",
+    "build:seo": "node scripts/build-seo.mjs",
+    "dev": "tailwindcss -i assets/src/app.css -o assets/app.css --watch"
+  },
+  "devDependencies": {
+    "aos": "2.3.4",
+    "tailwindcss": "3.4.19"
+  }
+}

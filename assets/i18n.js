@@ -7,7 +7,8 @@
 
 const I18N_EN = {
   // Meta / accessibility
-  'meta.desc': 'Consulting and processing services for visas, work permits, renewals and documents for foreigners in Thailand.',
+  'meta.title': 'Visa &amp; Work Permit Services in Thailand | FDI Accounting &amp; Advisory',
+  'meta.desc': 'Visa, work permit, renewal and document legalization services for foreigners in Thailand — by FDI Accounting & Advisory, part of FDI Group, since 2003.',
   'a11y.loading': 'Loading',
   'a11y.lang': 'Select language',
   'a11y.top': 'Back to top',
@@ -24,6 +25,7 @@ const I18N_EN = {
 
   // Hero
   'hero.title': 'Visas and work permits in Thailand, made easy',
+  'hero.imgAlt': 'FDI consultants advising on visas and work permits',
   'hero.intro': 'FDI Accounting &amp; Advisory Co., Ltd., part of FDI Group, has advised Thai and foreign businesses since 2003. We consult on and handle visas, work permits, renewals and documents for foreigners — and take care of your business end to end, from accounting and tax to payroll and HR.',
   'hero.tagline': 'Initial consultation • Document assessment • Clear next steps',
   'hero.follow': 'Follow us',
@@ -197,3 +199,11 @@ const CONTENT = {
     ]
   }
 };
+
+// FAQPage structured data — used by assets/script.js (current language) and scripts/build-seo.mjs (static TH)
+const faqJsonLd = lang => ({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  inLanguage: lang,
+  mainEntity: CONTENT[lang].FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
+});

@@ -1,10 +1,11 @@
 /* ==========================================================================
    Visa & Work Permit — FDI Accounting & Advisory
-   Loaded before Tailwind (Play CDN), so Tailwind utilities override these
-   component classes when both are used on the same element.
+   Bundled into assets/app.css by `npm run build:css` (see assets/src/tailwind.css), before
+   Tailwind utilities, so utilities override these component classes on the same element.
+   Rebuild after editing (or keep `npm run dev` running).
    ========================================================================== */
 
-/* ---------- Design tokens (keep in sync with tailwind.config in index.html) ---------- */
+/* ---------- Design tokens (keep in sync with tailwind.config.js) ---------- */
 :root {
   --brand: #18A84C;
   --brand-dark: #12903F;

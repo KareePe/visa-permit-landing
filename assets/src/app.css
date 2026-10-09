@@ -1,0 +1,8 @@
+/* CSS bundle — build with `npm run build:css` (output: assets/app.css, minified).
+   Order matters: Tailwind base → AOS → our components (assets/style.css) → Tailwind utilities,
+   so utilities still override component classes used on the same element. */
+@import "tailwindcss/base";
+@import "aos/dist/aos.css";
+@import "../style.css";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
